@@ -1,10 +1,11 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import About from './components/About';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
   const [myMode, setMyMode] = useState('light')
@@ -22,24 +23,31 @@ function App() {
     if (myMode === 'light') {
 
       setMyMode('dark')
-      showAlert('dark mode turn on', 'success')
+      showAlert('chế độ tối đã bật ! ', 'success')
+      document.body.style.backgroundColor = 'black'
+      document.title = 'Minh First React App - Dark Mode'
+      
     } else {
       setMyMode('light')
-      showAlert('light mode turn on', 'success')
+      showAlert('chế độ sáng đã bật ! ', 'success')
+      document.body.style.backgroundColor = 'white'
+      document.title = 'Minh First React App - Light Mode'
     }
   }
 
   return (
-    <>
-      <Navbar title="Correct Title" mode={myMode} toggle={toggleChange} />
+    <Router>
+      <Navbar title="Minh FE" mode={myMode} toggle={toggleChange} />
       <Alert alert={alert} />
       <div className="container my-3">
-
-        <TextForm textFormHeading="Enter text" />
-        {/* <About/> */}
+        <Routes>
+          <Route exact path="/" element={ <TextForm textFormHeading="Nhập chữ" mode={myMode} />}/>
+          <Route exact path="/about" element={  <About mode={myMode}/>}/>
+        </Routes>
+      
       </div>
-
-    </>
+      </Router>
+    
   );
 }
 
