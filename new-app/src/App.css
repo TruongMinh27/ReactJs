@@ -1,0 +1,33 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #7EE8FA;
+}
+
+button {
+  padding: 10px 40px;
+  cursor: pointer;
+  background-color: #EEC0C6;
+  border: 1px solid #fcfc;
+  border-radius: 10px;
+  padding: 24px 40px;
+}
+
+button:hover {
+  opacity: 0.6;
+}
+
+.item {
+  background: #fff;
+  width: 100vh;
+  margin: 5px;
+  padding: 24px;
+  border-radius: 10px;
+}

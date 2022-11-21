@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ddd;
+    
+}
+
+.book {
+    background-color: #fff;
+    flex: 0 0 16.66666%;
+    max-width: 16.66666%;
+    border-radius: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+}
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width:768px ) {
+    .book {
+                background-color: #fff;
+                flex: 0 0 100%;
+                max-width: 100%;
+    }
+}
