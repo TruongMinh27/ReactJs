@@ -60,6 +60,7 @@ const Container = styled.div`
   left:0;
   right:0;
   z-index:1;
+  
 
 a {
   padding:0 16px;
