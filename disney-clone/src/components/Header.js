@@ -33,7 +33,7 @@ const Nav = styled.nav`
 `
 
 const LogoImg = styled.img`
-        width:90px;
+        width:130px;
         padding:0 24px;
        
 `
