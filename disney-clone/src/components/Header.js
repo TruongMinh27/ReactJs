@@ -1,11 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Link,
+} from "react-router-dom";
 function Header() {
     return (
         <Nav>
-            <LogoImg src='./images/logo.svg'/>
+            <Link to='/'><LogoImg src='./images/logo.svg' /></Link>
             <NavMenu>
-                <a href="#"><img src='./images/home-icon.svg' /><span>Home</span></a>
+                <Link to="/"><img src='./images/home-icon.svg' /><span>Home</span></Link>
                 <a href="#"><img src='./images/search-icon.svg' /><span>Search</span></a>
                 <a href="#"><img src='./images/watchlist-icon.svg' /><span>WatchList</span></a>
                 <a href="#"><img src='./images/original-icon.svg' /><span>Originals</span></a>
