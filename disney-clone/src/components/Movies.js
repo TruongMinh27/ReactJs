@@ -1,34 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { selectRecommend } from '../features/movies/moviesSlice'
+import { Link } from 'react-router-dom'
 function Movies() {
+  const movies = useSelector(selectRecommend)
+  console.log(movies)
   return (
     <Container>
           <h4> Recommened For You</h4>
        <Content>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
-              <Wrap>
-                  <img src="https://image.tmdb.org/t/p/w500//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-              </Wrap>
+              {
+                movies && movies.map((movie)=>(
+                <Wrap key={movie.id}>
+                    <Link to={`/details/${movie.id}`}>
+                  <img src={movie.cardImg} alt={movie.title} />
+                  </Link>
+                </Wrap>
+                ))
+              }
        </Content>
     </Container>
   )
@@ -44,12 +34,15 @@ const Content = styled.div`
     display:grid;
     grid-gap:25px;
     grid-template-columns:repeat(4,minmax(0,1fr));
+    @media(max-width:768px){
+        grid-template-columns:repeat(1,minmax(0,1fr));
+    }
 `
 
 const Wrap = styled.div`
     
     border-radius:10px;
-    border:3px solid rgba(249,249,249,0.1);
+    border:3px solid rgba(249,249,249,0);
     box-shadow:rgba(0 0 0 / 69%) 0px 26px 30px -10px, rgba(0 0 0 / 73%) 0px 16px 10px -10px;
     transition:all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
     overflow:hidden;

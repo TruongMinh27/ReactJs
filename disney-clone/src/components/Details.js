@@ -1,37 +1,64 @@
-import React from 'react'
+import { collection, query, doc, getDoc, onSnapshot } from 'firebase/firestore'
+import React, { useEffect,useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectUserName } from '../features/user/userSlice'
 import styled from 'styled-components'
+import db from '../firebase'
+
+
 function Details() {
+    const userName = useSelector(selectUserName)
+    const {id} = useParams()
+    const [movie , setMovie] = useState()
+    
+    useEffect(()=>{
+        getDoc(doc(db, "movies", id)).then(docSnap => {
+            if (docSnap.exists()) {
+                setMovie(docSnap.data())
+            } else {
+                console.log("No such document!");
+            }
+        })
+       
+    }, [userName])
+
+console.log(movie);
   return (
     <Container>
-        <Background>
-              <img src="https://image.tmdb.org/t/p/w1280//14QbnygCuTO0vl7CAFmPf1fgZfV.jpg" />
-        </Background>
-        <Logo>
-              <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DDFF0FDF457E092EE53149CE7DB5BD14CB97E27B92D2D087E7C687B4E3073DE2/scale?width=1440&aspectRatio=1.78"/>
-        </Logo>
+        {movie && (
+        <>
+                  <Background>
+                      <img src={movie.backgroundImg} />
+                  </Background>
+                  <Logo>
+                      <img src={movie.titleImg} />
+                  </Logo>
 
-        <Controls>
-            <PlayButton>
-                  <img src="./images/play-icon-black.png"/>
-                  <span>Play</span>
-            </PlayButton>
-            <TrailerButton>
-                  <img src="./images/play-icon-white.png" />
-                  <span>Trailer</span>
-            </TrailerButton>
-            <AddButton>
-                <span>+</span>
-            </AddButton>
-            <GroupButton>
-                  <img src="./images/group-icon.png" />
-            </GroupButton>
-        </Controls>
-            <SubTitle>
-                  2021 • 1 Season • Science Fiction, Action-Adventure, Buddy
-            </SubTitle>
-            <Decription>
-                  Marvel Studios’ “The Falcon and The Winter Soldier” stars Anthony Mackie as Sam Wilson aka The Falcon, and Sebastian Stan as Bucky Barnes aka The Winter Soldier. The pair, who came together in the final moments of “Avengers: Endgame,” team up on a global adventure that tests their abilities—and their patience.
-            </Decription>
+                  <Controls>
+                      <PlayButton>
+                          <img src="/images/play-icon-black.png" />
+                          <span>Play</span>
+                      </PlayButton>
+                      <TrailerButton>
+                          <img src="/images/play-icon-white.png" />
+                          <span>Trailer</span>
+                      </TrailerButton>
+                      <AddButton>
+                          <span>+</span>
+                      </AddButton>
+                      <GroupButton>
+                          <img src="/images/group-icon.png" />
+                      </GroupButton>
+                  </Controls>
+                  <SubTitle>
+                      {movie.subTitle}
+                  </SubTitle>
+                  <Decription>
+                      {movie.description}
+                  </Decription>
+        </>
+        )}
     </Container>
   )
 }
@@ -131,4 +158,5 @@ const Decription = styled.div`
     line-height:1.4;
     font-size:20px;
     margin-top:16px;
+    max-width:650px;
 `

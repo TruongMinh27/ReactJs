@@ -1,15 +1,38 @@
-import React from 'react'
-import styled from 'styled-components'
-import ImageSlider from './ImageSlider'
-import Viewers from './Viewers'
-import Movies from './Movies'
-
+import React , {useEffect} from 'react';
+import styled from 'styled-components';
+import ImageSlider from './ImageSlider';
+import Viewers from './Viewers';
+import Movies from './Movies';
+import db from '../firebase';
+import NewDisney from './NewDisney';
+import Original from './Original';
+import Trending from './Trending';
+import { useDispatch,useSelector } from 'react-redux';
+import { setMovies } from '../features/movies/moviesSlice';
+import { selectUserName } from '../features/user/userSlice';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 function Home() {
+  const dispatch = useDispatch();
+  const userName = useSelector(selectUserName);
+
+  useEffect(()=>{
+    onSnapshot((collection(db,'movies')),(snapshot) => {
+     let tempMovies = snapshot.docs.map((doc)=>{
+        return  {id: doc.id, ...doc.data()}
+     }) 
+
+     dispatch(setMovies(tempMovies))
+    })
+  }, [userName])
+
   return (
     <Container>
         <ImageSlider/>
         <Viewers/>
       <Movies/>
+      <NewDisney/>
+      <Original/>
+      <Trending/>
     </Container>
   )
 }
