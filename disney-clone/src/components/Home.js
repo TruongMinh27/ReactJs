@@ -30,9 +30,10 @@ function Home() {
         <ImageSlider/>
         <Viewers/>
       <Movies/>
-      <NewDisney/>
+      {/* <NewDisney/>
       <Original/>
-      <Trending/>
+      <Trending/> */}
+      <></>
     </Container>
   )
 }

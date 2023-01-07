@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home';
 import Details from './components/Details';
 import Login from './components/Login';
+import Footer from './components/Footer';
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +21,7 @@ function App() {
           <Route path="/details/:id" element={<Details />} />
           <Route path="/home" element={<Home />} />
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </div>
   );
